@@ -2,6 +2,8 @@
 
 ###http://bootstrapvalidator.votintsev.ru/validators/
 
+![](https://img2020.cnblogs.com/blog/2044141/202005/2044141-20200522163244908-60201718.png)
+
 No. | Name | Description 
 :-:|:-:|:-:
 1 |	base64 |验证 base64 编码字符串
