@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>用户注册</title>
+
+    <!--Bootstrap 验证器插件需要 jQuery 和bootstrap -->
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/css/bootstrapValidator.min.css"/>
+
+    <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <!--接下来，需要插件 javascript 文件：-->
+    <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
+    <!--  如果您想要使用的默认消息翻译语言包,最后包括:-->
+    <script type="text/javascript" src="/js/language/zh_CN.js"></script>
+
+    <script src="/js/userRegister.js"></script>
+</head>
+
+<body>
+<!--由于 bootstrapValidator 设计为与 Bootstrap 一起使用，因此窗体必须使用 Bootstrap 类进行结构化。-->
+<div class="container ">
+    <div id="registerBox m-auto">
+        <form id="userRegister" class="form-horizontal registerForm" method="post">
+            <fieldset>
+                <legend>Sign Up</legend>
+            </fieldset>
+            <div id="contentBox">
+                <div class="form-group">
+                    <label for="userName" class="col-sm-2 control-label">用户名:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="userName" name="userName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="mobilePhone" class="col-sm-2 control-label">手机号码:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="mobilePhone" name="mobilePhone">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">密码:</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <div style="display:inline;">
+                        <label class="help-block">密码长度至少为6位,用户名和密码不能相同</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="repassword" class="col-sm-2 control-label">确认密码:</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" id="repassword" name="repassword">
+                    </div>
+                </div>
+                <div id="passwordTip"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">纬度Latitude</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="latitude"/>
+                    </div>
+                    <div style="display:inline;">
+                        <label class="help-block">纬度必须在-90.0和90.0之间</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">经度Longitude</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="longitude"/>
+                    </div>
+                    <div style="display:inline;">
+                        <label class="help-block">经度必须在-180.0和180.0之间</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">程序设计语言,选择2 - 4个</label>
+                    <div class="col-sm-4">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="languages" value="net"/> .Net
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="languages" value="java"/> Java
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="languages" value="c"/> C/C++
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="languages" value="php"/> PHP
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="languages" value="perl"/> Perl
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Editors,选择2 - 3个</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" name="editors" multiple="multiple" style="height: 200px;">
+                            <option value="" disabled>Choose 2 - 3 editors</option>
+                            <option value="atom">Atom</option>
+                            <option value="eclipse">Eclipse</option>
+                            <option value="netbeen">NetBean</option>
+                            <option value="nodepadplusplus">Nodepad++</option>
+                            <option value="phpstorm">PHP Storm</option>
+                            <option value="sublime">Sublime</option>
+                            <option value="webstorm">Web Storm</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="email"/>
+                    </div>
+                </div>
+            </div>
+
+            <div id="buttonBox">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-4">
+                        <!-- ATTENTION!!!!!!   如果使用命名"submit"按钮，则无法在验证后提交表单
+                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>-->
+                        <input type="button" class="btn btn-primary" onclick="userRegister()" id="userReg"
+                               value="立即注册"></input>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">注册成功</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">注册失败</h4>
+            </div>
+            <div class="modal-body" style="align-content: center;font-size: 1.5em">
+                <div style="margin:0 auto;align-content: center;">注册失败,请重试!</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</body>
+
+</html>
